@@ -12,10 +12,11 @@ import java.time.LocalDate;
  */
 @Data()
 @Entity
-@Table(name = "account")
+@Table(name = "invitation")
 public class Invitation extends BaseEntity {
 
     private String invitationText;
+    private int invitationId;
     private String email;
     private int adultCount;
     private int childrenCount;
