@@ -1,36 +1,29 @@
 package pl.mlipinski.wedding.management.web.ui;
 
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.mlipinski.wedding.management.domain.repository.InvitationRepository;
 
 /**
- * Generate view for list of whole invitations.
+ * .
  */
 @SpringUI
 public class InvitationListUI extends UI {
 
-    private InvitationGrid invitationGrid;
-    private VerticalLayout layout;
+    private Navigator navigator;
+    private SpringViewProvider springViewProvider;
 
     @Autowired
-    public InvitationListUI(InvitationRepository invitationRepository) {
-        this.invitationGrid = new InvitationGrid(invitationRepository);
-        this.layout = new VerticalLayout();
+    public InvitationListUI(SpringViewProvider springViewProvider) {
+        this.springViewProvider = springViewProvider;
+        this.navigator = new Navigator(this, this);
     }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        setContent(layout);
-        prepareLayout();
+        navigator.addProvider(springViewProvider);
     }
-
-    private void prepareLayout() {
-        layout.addComponentsAndExpand(invitationGrid);
-        layout.setSizeFull();
-    }
-
-
 }

@@ -1,6 +1,8 @@
-package pl.mlipinski.wedding.management.web.ui;
+package pl.mlipinski.wedding.management.web.component;
 
 import com.vaadin.data.Binder;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.components.grid.EditorSaveListener;
@@ -12,7 +14,7 @@ import pl.mlipinski.wedding.management.domain.repository.InvitationRepository;
  * Grid for managing invitations.
  */
 @Slf4j
-class InvitationGrid extends Grid<Invitation> {
+public class InvitationGrid extends Grid<Invitation> implements View{
 
     private static final String INVITATION_ID_HEADER = "Numer zaproszenia";
     private static final String INVITATION_TEXT_HEADER = "Tekst zaproszenia";
@@ -31,10 +33,15 @@ class InvitationGrid extends Grid<Invitation> {
     private static final String CONFIRMATION_DATE_ID = "6";
     private InvitationRepository invitationRepository;
 
-    InvitationGrid(InvitationRepository invitationRepository) {
+    public InvitationGrid(InvitationRepository invitationRepository) {
         this.invitationRepository = invitationRepository;
         this.setSizeFull();
         prepareGrid();
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
+
     }
 
     private void prepareGrid() {
@@ -96,4 +103,5 @@ class InvitationGrid extends Grid<Invitation> {
             this.getDataProvider().refreshAll();
         });
     }
+
 }
