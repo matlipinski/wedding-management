@@ -20,6 +20,7 @@ public class Invitation extends BaseEntity {
     private String email;
     private int adultCount;
     private int childrenCount;
+    private Boolean delivered;
     private Boolean confirmed;
     private LocalDate confirmationDate;
 
