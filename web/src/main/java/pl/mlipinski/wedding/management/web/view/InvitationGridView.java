@@ -13,7 +13,7 @@ import pl.mlipinski.wedding.management.web.component.InvitationGrid;
  */
 @SpringView(name = InvitationGridView.VIEW_NAME)
 public class InvitationGridView extends VerticalLayout implements View {
-    
+
     public static final String VIEW_NAME = "invitationGridView";
     private InvitationGrid invitationGrid;
 

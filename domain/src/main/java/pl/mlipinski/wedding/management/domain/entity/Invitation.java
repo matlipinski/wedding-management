@@ -1,10 +1,9 @@
 package pl.mlipinski.wedding.management.domain.entity;
 
 import lombok.Data;
+import pl.mlipinski.wedding.management.domain.enums.WhomGuestType;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -23,5 +22,7 @@ public class Invitation extends BaseEntity {
     private Boolean delivered;
     private Boolean confirmed;
     private LocalDate confirmationDate;
+    @Enumerated(EnumType.STRING)
+    private WhomGuestType whomGuestType;
 
 }

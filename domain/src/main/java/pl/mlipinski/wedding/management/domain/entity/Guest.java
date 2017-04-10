@@ -1,10 +1,9 @@
 package pl.mlipinski.wedding.management.domain.entity;
 
 import lombok.Data;
+import pl.mlipinski.wedding.management.domain.enums.GenderType;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Data of guests connected with account.
@@ -16,8 +15,9 @@ public class Guest extends BaseEntity {
     private String firstName;
     private String lastName;
     private boolean isComing;
-    private Integer age;
-    private String gender;
+    private int age;
+    @Enumerated(EnumType.STRING)
+    private GenderType gender;
 
     @ManyToOne
     private Invitation invitation;

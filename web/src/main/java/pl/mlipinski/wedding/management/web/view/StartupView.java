@@ -15,15 +15,6 @@ import com.vaadin.ui.VerticalLayout;
 public class StartupView extends VerticalLayout implements View {
 
     public static final String VIEW_NAME = "";
-    private Button invitationListButton;
-
-    public StartupView() {
-        setSizeFull();
-        this.invitationListButton = new Button("Lista zaproszeń",
-                (Button.ClickListener) event ->
-                        UI.getCurrent().getNavigator().navigateTo(InvitationGridView.VIEW_NAME));
-        this.addComponent(invitationListButton);
-    }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {

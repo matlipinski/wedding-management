@@ -14,7 +14,7 @@ import pl.mlipinski.wedding.management.domain.repository.InvitationRepository;
  * Grid for managing invitations.
  */
 @Slf4j
-public class InvitationGrid extends Grid<Invitation> implements View{
+public class InvitationGrid extends Grid<Invitation>{
 
     private static final String INVITATION_ID_HEADER = "Numer zaproszenia";
     private static final String INVITATION_TEXT_HEADER = "Tekst zaproszenia";
@@ -39,14 +39,9 @@ public class InvitationGrid extends Grid<Invitation> implements View{
         prepareGrid();
     }
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-
-    }
-
     private void prepareGrid() {
         prepareGritColumns();
-        setGridColumns();
+      //  setGridColumns();
         setGridItems();
         setSaveListener();
         log.debug("Invitation grid prepared");

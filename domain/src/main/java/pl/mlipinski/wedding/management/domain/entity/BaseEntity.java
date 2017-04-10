@@ -1,6 +1,8 @@
 package pl.mlipinski.wedding.management.domain.entity;
 
 
+import lombok.Data;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -12,6 +14,7 @@ import java.util.Date;
  * Base entity.
  */
 @MappedSuperclass
+@Data
 public class BaseEntity implements Serializable{
 
     @Id
