@@ -1,11 +1,10 @@
 package pl.mlipinski.wedding.management.web.component;
 
 import com.vaadin.data.Binder;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.components.grid.EditorSaveListener;
+
 import lombok.extern.slf4j.Slf4j;
 import pl.mlipinski.wedding.management.domain.entity.Invitation;
 import pl.mlipinski.wedding.management.domain.repository.InvitationRepository;
@@ -37,6 +36,10 @@ public class InvitationGrid extends Grid<Invitation>{
         this.invitationRepository = invitationRepository;
         this.setSizeFull();
         prepareGrid();
+        final Invitation invitation = new Invitation();
+        invitation.setInvitationText("a");
+        invitation.setInvitationId(1);
+        invitationRepository.save(invitation);
     }
 
     private void prepareGrid() {

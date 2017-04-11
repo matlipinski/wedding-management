@@ -1,14 +1,17 @@
 package pl.mlipinski.wedding.management.domain.entity;
 
-
-import lombok.Data;
-
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import javax.persistence.Convert;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Version;
-import java.io.Serializable;
-import java.util.Date;
+
+import lombok.Data;
+import pl.mlipinski.wedding.management.domain.common.DateTimeConverter;
 
 /**
  * Base entity.
@@ -24,8 +27,25 @@ public class BaseEntity implements Serializable{
     @Version
     protected int version;
 
-    protected Date creationDate;
+    @Convert(converter = DateTimeConverter.class)
+    protected LocalDateTime creationTime;
 
-    protected Date modificationDate;
+    @Convert(converter = DateTimeConverter.class)
+    protected LocalDateTime modificationTime;
+
+    @PrePersist
+    protected void beforeInsert() {
+        if(creationTime == null) {
+            creationTime = LocalDateTime.now();
+        }
+        if(modificationTime == null) {
+            modificationTime = LocalDateTime.now();
+        }
+    }
+
+    @PreUpdate
+    protected void beforeUpdate() {
+        modificationTime = LocalDateTime.now();
+    }
 
 }
