@@ -36,10 +36,6 @@ public class InvitationGrid extends Grid<Invitation>{
         this.invitationRepository = invitationRepository;
         this.setSizeFull();
         prepareGrid();
-        final Invitation invitation = new Invitation();
-        invitation.setInvitationText("a");
-        invitation.setInvitationId(1);
-        invitationRepository.save(invitation);
     }
 
     private void prepareGrid() {
