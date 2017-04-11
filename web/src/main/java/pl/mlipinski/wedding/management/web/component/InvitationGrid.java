@@ -40,7 +40,6 @@ public class InvitationGrid extends Grid<Invitation>{
 
     private void prepareGrid() {
         prepareGritColumns();
-      //  setGridColumns();
         setGridItems();
         setSaveListener();
         log.debug("Invitation grid prepared");
@@ -79,11 +78,6 @@ public class InvitationGrid extends Grid<Invitation>{
                 .setId(CONFIRMATION_DATE_ID);
 
         this.sort(INVITATION_ID_ID);
-    }
-
-    private void setGridColumns() {
-        this.setColumns(INVITATION_ID_ID, INVITATION_TEXT_ID, ADULT_COUNT_ID, CHILDREN_COUNT_ID,
-                DELIVERED_ID, CONFIRMED_ID, CONFIRMATION_DATE_ID);
     }
 
     private void setGridItems() {
