@@ -18,7 +18,7 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     Guest findById(long guestId);
 
     @Query("SELECT g from Guest g " +
-            "WHERE lower(g.firstName) like CONCAT('%',:searchText,'%')  " +
-            "OR lower(g.lastName) like CONCAT('%',:searchText,'%')")
+            "WHERE lower(g.firstName) like CONCAT('%',lower(:searchText),'%')  " +
+            "OR lower(g.lastName) like CONCAT('%',lower(:searchText),'%')")
     List<Guest> findByFirstNameOrLastName(@Param("searchText") String searchText);
 }
