@@ -55,7 +55,7 @@ public class GuestGrid extends Grid<Guest> {
         this.addColumn(Guest::getAge)
               .setCaption(AGE_HEADER)
               .setId(AGE_ID);
-        this.addColumn(Guest::isComing)
+        this.addColumn(Guest::getCommingDecision)
               .setCaption(IS_COMING_HEADER)
               .setId(IS_COMING_ID);
         this.addColumn(person -> "Edytuj", new ButtonRenderer<>(clickEvent -> {

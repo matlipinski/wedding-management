@@ -21,6 +21,7 @@ import com.vaadin.ui.UI;
 import lombok.extern.slf4j.Slf4j;
 import pl.mlipinski.wedding.management.domain.entity.Guest;
 import pl.mlipinski.wedding.management.domain.entity.Invitation;
+import pl.mlipinski.wedding.management.domain.enums.AttendanceDecision;
 import pl.mlipinski.wedding.management.domain.enums.GenderType;
 import pl.mlipinski.wedding.management.domain.repository.GuestRepository;
 import pl.mlipinski.wedding.management.domain.repository.InvitationRepository;
@@ -45,7 +46,7 @@ public class EditGuestView extends GridLayout implements View {
     private TextField lastNameField;
     private TextField firstNameField;
     private TextField ageField;
-    private CheckBox isComingBox;
+    private ComboBox<AttendanceDecision> isComingBox;
     private ComboBox<GenderType> genderTypeCombo;
     private Button saveButton;
     private Binder<Guest> binder;
@@ -70,7 +71,7 @@ public class EditGuestView extends GridLayout implements View {
     }
 
     private void initiateControls() {
-        invitationCombo = new ComboBox<>(INVITATION_CAPTION, invitationRepository.findAll());
+        invitationCombo = new ComboBox<>(INVITATION_CAPTION, invitationRepository.findNotAssigned());
         invitationCombo.setItemCaptionGenerator(Invitation::getInvitationText);
         invitationCombo.setWidth(50.0f, Unit.PERCENTAGE);
         lastNameField = new TextField(FIRST_NAME_CAPTION);
@@ -79,7 +80,7 @@ public class EditGuestView extends GridLayout implements View {
         firstNameField.setWidth(50.0f, Unit.PERCENTAGE);
         ageField = new TextField(AGE_CAPTION);
         ageField.setWidth(50.0f, Unit.PERCENTAGE);
-        isComingBox = new CheckBox(IS_COMMING_CAPTION);
+        isComingBox = new ComboBox<>(IS_COMMING_CAPTION,  Arrays.asList(AttendanceDecision.values()));
         isComingBox.setWidth(50.0f, Unit.PERCENTAGE);
         genderTypeCombo = new ComboBox<>(GENDER_CAPTION, getGenderTypes());
         genderTypeCombo.setWidth(50.0f, Unit.PERCENTAGE);
@@ -124,7 +125,8 @@ public class EditGuestView extends GridLayout implements View {
               .withConverter(new StringToIntegerConverter("To nie jest liczba"))
               .withValidator(new BeanValidator(Guest.class, "age"))
               .bind(Guest::getAge, Guest::setAge);
-        binder.bind(isComingBox, Guest::isComing, Guest::setComing);
+        binder.forField(isComingBox)
+                .bind(Guest::getCommingDecision, Guest::setCommingDecision);
         binder.forField(genderTypeCombo)
               .withValidator(new BeanValidator(Guest.class, "gender"))
               .bind(Guest::getGender, Guest::setGender);

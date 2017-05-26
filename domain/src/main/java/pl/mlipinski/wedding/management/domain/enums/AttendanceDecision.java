@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Available gender types.
+ * Decision of comming to weedding.
  */
 @AllArgsConstructor
-public enum GenderType {
-    MALE("mezczyzna"),
-    FEMALE("kobieta");
+public enum AttendanceDecision {
+    YES("Tak"),
+    NO("Nie"),
+    NOT_DETERMINED("Brak informacji"),
+    MAYBE("Moze");
 
     @Getter
     private String text;

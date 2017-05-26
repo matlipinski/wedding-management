@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Data;
+import pl.mlipinski.wedding.management.domain.enums.AttendanceDecision;
 import pl.mlipinski.wedding.management.domain.enums.GenderType;
 
 /**
@@ -22,11 +23,16 @@ public class Guest extends BaseEntity {
 
     @NotEmpty(message = "Pole nie może być puste")
     private String firstName;
+
     @NotEmpty(message = "Pole nie może być puste")
     private String lastName;
-    private boolean isComing;
+
+    @Enumerated(EnumType.STRING)
+    private AttendanceDecision commingDecision;
+
     @NotNull(message = "Pole nie może być puste")
     private int age;
+
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Pole nie może być puste")
     private GenderType gender;
