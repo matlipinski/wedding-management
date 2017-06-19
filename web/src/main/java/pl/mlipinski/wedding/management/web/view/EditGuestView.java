@@ -21,6 +21,7 @@ import com.vaadin.ui.UI;
 import lombok.extern.slf4j.Slf4j;
 import pl.mlipinski.wedding.management.domain.entity.Guest;
 import pl.mlipinski.wedding.management.domain.entity.Invitation;
+import pl.mlipinski.wedding.management.domain.enums.AttendanceDay;
 import pl.mlipinski.wedding.management.domain.enums.AttendanceDecision;
 import pl.mlipinski.wedding.management.domain.enums.GenderType;
 import pl.mlipinski.wedding.management.domain.repository.GuestRepository;
@@ -39,6 +40,7 @@ public class EditGuestView extends GridLayout implements View {
     private static final String LAST_NAME_CAPTION = "Imię";
     private static final String AGE_CAPTION = "Wiek";
     private static final String IS_COMMING_CAPTION = "Czy będzie";
+    private static final String ATTENDANCE_DAY_CAPTION = "Ktory dzien?";
     private static final String GENDER_CAPTION = "Płeć";
     private static final String SAVE_CAPTION = "Zapisz";
 
@@ -47,6 +49,7 @@ public class EditGuestView extends GridLayout implements View {
     private TextField firstNameField;
     private TextField ageField;
     private ComboBox<AttendanceDecision> isComingBox;
+    private ComboBox<AttendanceDay> attendanceDayBox;
     private ComboBox<GenderType> genderTypeCombo;
     private Button saveButton;
     private Binder<Guest> binder;
@@ -82,6 +85,8 @@ public class EditGuestView extends GridLayout implements View {
         ageField.setWidth(50.0f, Unit.PERCENTAGE);
         isComingBox = new ComboBox<>(IS_COMMING_CAPTION,  Arrays.asList(AttendanceDecision.values()));
         isComingBox.setWidth(50.0f, Unit.PERCENTAGE);
+        attendanceDayBox = new ComboBox<>(ATTENDANCE_DAY_CAPTION,  Arrays.asList(AttendanceDay.values()));
+        attendanceDayBox.setWidth(50.0f, Unit.PERCENTAGE);
         genderTypeCombo = new ComboBox<>(GENDER_CAPTION, getGenderTypes());
         genderTypeCombo.setWidth(50.0f, Unit.PERCENTAGE);
         saveButton = new Button(SAVE_CAPTION, saveGuest());
@@ -107,8 +112,8 @@ public class EditGuestView extends GridLayout implements View {
     }
 
     private void addComponents() {
-        addComponents(invitationCombo, lastNameField, firstNameField, ageField, isComingBox, genderTypeCombo,
-              saveButton);
+        addComponents(invitationCombo, lastNameField, firstNameField, ageField, isComingBox,attendanceDayBox,
+                genderTypeCombo, saveButton);
     }
 
     private void bindFields() {
@@ -127,6 +132,8 @@ public class EditGuestView extends GridLayout implements View {
               .bind(Guest::getAge, Guest::setAge);
         binder.forField(isComingBox)
                 .bind(Guest::getCommingDecision, Guest::setCommingDecision);
+        binder.forField(attendanceDayBox)
+                .bind(Guest::getAttendanceDay, Guest::setAttendanceDay);
         binder.forField(genderTypeCombo)
               .withValidator(new BeanValidator(Guest.class, "gender"))
               .bind(Guest::getGender, Guest::setGender);

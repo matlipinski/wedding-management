@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Data;
+import pl.mlipinski.wedding.management.domain.enums.AttendanceDay;
 import pl.mlipinski.wedding.management.domain.enums.AttendanceDecision;
 import pl.mlipinski.wedding.management.domain.enums.GenderType;
 
@@ -29,6 +30,9 @@ public class Guest extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private AttendanceDecision commingDecision;
+
+    @Enumerated(EnumType.STRING)
+    private AttendanceDay attendanceDay;
 
     @NotNull(message = "Pole nie może być puste")
     private int age;

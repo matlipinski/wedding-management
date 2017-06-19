@@ -20,12 +20,14 @@ public class GuestGrid extends Grid<Guest> {
     private static final String FIRST_NAME_HEADER = "Imię";
     private static final String AGE_HEADER = "Wiek";
     private static final String IS_COMING_HEADER = "Czy będzie";
+    private static final String ATTENDANCE_DAY_HEADER = "Ktory dzien?";
 
     private static final String INVITATION_ID_ID = "0";
     private static final String LAST_NAME_ID = "1";
     private static final String FIRST_NAME_ID = "2";
     private static final String AGE_ID = "3";
     private static final String IS_COMING_ID = "4";
+    private static final String ATTENDANCE_DAY_ID = "5";
 
     private GuestRepository guestRepository;
 
@@ -58,6 +60,9 @@ public class GuestGrid extends Grid<Guest> {
         this.addColumn(Guest::getCommingDecision)
               .setCaption(IS_COMING_HEADER)
               .setId(IS_COMING_ID);
+        this.addColumn(Guest::getAttendanceDay)
+                .setCaption(ATTENDANCE_DAY_HEADER)
+                .setId(ATTENDANCE_DAY_ID);
         this.addColumn(person -> "Edytuj", new ButtonRenderer<>(clickEvent -> {
             String navigationState = EditGuestView.VIEW_NAME + "/" + clickEvent.getItem()
                   .getId();
